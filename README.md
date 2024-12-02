@@ -1,14 +1,36 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+# Multi-Platform Date Picker for Compose Multiplatform (CMP/KMM)
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+## Overview
+This repository contains a multi-platform date and time picker implementation built using Jetpack Compose Multiplatform (CMP). This project aims to provide a simple and reusable date-picker solution across Android, iOS, and Desktop applications.
+This allows you to quickly implement a platform-consistent date-picker that works seamlessly across all platforms!
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Demo
+## Android
+https://github.com/user-attachments/assets/f20d3b61-55b5-4443-b7f9-6d32d49d5d27
+
+## IOS
+https://github.com/user-attachments/assets/e253a787-c113-497c-959c-d74f6faaa8ac
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Features
+- **Cross-Platform**: Works on Android, iOS, and Desktop.
+- **Platform-Specific Design**: Uses the appropriate native date-picker component for each platform:
+- **Android**: Material3 Date Picker Dialog 🗓️
+- **iOS**: Swift Date Picker Wheel 🕰️
+- **Desktop**: Text Field for date and time entry 💻
+- **Easy-to-Use**: Simple API to integrate into your app.
+- **Customizable**: Supports different date/time formats and more.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+- Fork the repository.
+- Create a new branch (git checkout -b feature-branch).
+- Commit your changes (git commit -m 'Add some feature').
+- Push to the branch (git push origin feature-branch).
+- Open a pull request.
+
+## Contact
+
+For any inquiries, please contact waqaswaseem679@gmail.com.
