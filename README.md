@@ -21,6 +21,97 @@ https://github.com/user-attachments/assets/e253a787-c113-497c-959c-d74f6faaa8ac
 - **Easy-to-Use**: Simple API to integrate into your app.
 - **Customizable**: Supports different date/time formats and more.
 
+ ## Android Date Picker
+ ```kotlin
+actual fun pickDate(context: Any?, onDatePicked: (String) -> Unit) {
+    // Ensure context is of type Context
+    if (context !is Context) return
+
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    // Android-specific DatePickerDialog
+    DatePickerDialog(
+        context,
+        { _, selectedYear, selectedMonth, selectedDay ->
+            val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+            onDatePicked(date)
+        },
+        year,
+        month,
+        day
+    ).show()
+}
+```
+
+## IOS Date Picker
+```kotlin
+actual fun pickDate(context: Any?, onDatePicked: (String) -> Unit) {
+    val datePicker = UIDatePicker().apply {
+        datePickerMode = UIDatePickerMode.UIDatePickerModeDate
+        preferredDatePickerStyle =
+            UIDatePickerStyle.UIDatePickerStyleWheels // Use the wheel-style picker
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    val alertController = UIAlertController.alertControllerWithTitle(
+        title = "Pick a Date",
+        message = "\n\n\n\n\n\n\n",
+        preferredStyle = UIAlertControllerStyleAlert
+    )
+
+    alertController.view.addSubview(datePicker)
+
+    // Set constraints for the DatePicker
+    datePicker.centerXAnchor.constraintEqualToAnchor(alertController.view.centerXAnchor).active =
+        true
+    datePicker.topAnchor.constraintEqualToAnchor(
+        alertController.view.topAnchor,
+        constant = 10.0
+    ).active = true
+    datePicker.widthAnchor.constraintEqualToAnchor(
+        alertController.view.widthAnchor,
+        constant = -20.0
+    ).active = true
+
+    alertController.addAction(
+        UIAlertAction.actionWithTitle(
+            title = "Done",
+            style = UIAlertActionStyleDefault
+        ) { _ ->
+            val formatter = NSDateFormatter().apply {
+                dateFormat = "dd-MM-yyyy"
+            }
+            val selectedDate = formatter.stringFromDate(datePicker.date)
+            onDatePicked(selectedDate)
+        }
+    )
+
+    // Present the alert
+    UIApplication.sharedApplication.keyWindow?.rootViewController?.presentViewController(
+        alertController,
+        animated = true,
+        completion = null
+    )
+}
+```
+
+## Desktop Date Picker
+```kotlin
+actual fun pickDate(context: Any?, onDatePicked: (String) -> Unit) {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val selectedDate = JOptionPane.showInputDialog("Enter a date (dd/MM/yyyy):")
+    try {
+        val date = LocalDate.parse(selectedDate, formatter)
+        onDatePicked(date.format(formatter))
+    } catch (e: Exception) {
+        println("Invalid date format")
+    }
+}
+```
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
