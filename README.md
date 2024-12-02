@@ -121,6 +121,9 @@ Contributions are welcome! Please follow these steps:
 - Commit your changes (git commit -m 'Add some feature').
 - Push to the branch (git push origin feature-branch).
 - Open a pull request.
+  
+## Want to Help?
+If you find this project useful, please consider starring the repository ⭐! It encourages the development of this project and helps others discover it. Your support is greatly appreciated!
 
 ## Contact
 
