@@ -1,5 +1,6 @@
 package org.waqas028.data_store_kmp
 
+import LocalPlatformContext
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,15 +21,20 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
-fun App(context: Any?) {
+fun App() {
     MaterialTheme {
-        AppContent(context)
+        AppContent()
     }
 }
 
 // commonMain
 @Composable
-fun AppContent(context: Any?) {
+fun AppContent() {
+
+
+    val platformContext = LocalPlatformContext.current
+
+
     var selectedDate by remember { mutableStateOf("Select a date") }
     var selectedTime by remember { mutableStateOf("Select a time") }
 
@@ -47,13 +53,13 @@ fun AppContent(context: Any?) {
 
         // Date Picker
         Text(text = "Date: $selectedDate")
-        Button(onClick = { pickDate(context) { date -> selectedDate = date } }) {
+        Button(onClick = { pickDate(platformContext) { date -> selectedDate = date } }) {
             Text("Pick a Date")
         }
 
         // Time Picker
         Text(text = "Time: $selectedTime")
-        Button(onClick = { pickTime(context) { time -> selectedTime = time } }) {
+        Button(onClick = { pickTime(platformContext) { time -> selectedTime = time } }) {
             Text("Pick a Time")
         }
     }
