@@ -1,5 +1,6 @@
 package org.waqas028.data_store_kmp
 
+import LocalPlatformContext
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
@@ -7,6 +8,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import java.util.Calendar
@@ -17,7 +19,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            App(this)
+
+            val activityContext = LocalContext.current // This IS an Activity Context!
+
+
+            CompositionLocalProvider(LocalPlatformContext provides activityContext) {
+                App()
+            }
+
         }
     }
 }
@@ -25,8 +34,7 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    val context = LocalContext.current
-    App(context)
+    App()
 }
 
 // Android-specific implementation
